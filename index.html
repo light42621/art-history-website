@@ -1,206 +1,118 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Art History</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art History Timeline</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: sans-serif;
       margin: 0;
-      background-color: #f7f7f7;
-      color: #333;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
     }
     header {
-      background: #2c3e50;
-      color: white;
-      padding: 1rem;
-      text-align: center;
       position: sticky;
       top: 0;
-      z-index: 1000;
-    }
-    nav {
-      background: #222;
-      color: white;
-      padding: 0.5rem 1rem;
-      overflow-x: auto;
-      white-space: nowrap;
+      background: var(--bg-header);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    nav .links {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: #aaa;
-      text-decoration: none;
-      margin-right: 1rem;
-      display: inline-block;
-    }
-    nav a:hover {
-      color: white;
-    }
-    .controls {
-      display: flex;
-      gap: 1rem;
       align-items: center;
+      padding: 1rem;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .language-toggle {
-      cursor: pointer;
-      background: #444;
-      color: white;
-      border: none;
-      padding: 0.3rem 0.8rem;
-      border-radius: 5px;
-    }
-    #searchInput {
-      padding: 0.3rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    main {
-      padding: 2rem;
+    .controls input, .controls button {
+      margin-left: 0.5rem;
     }
     .period {
-      margin-bottom: 3rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 2rem;
+      border-bottom: 1px solid #ccc;
+      padding: 1rem;
+      transition: all 0.4s ease-in-out;
     }
-    .artwork {
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 1rem 0;
-      cursor: pointer;
-    }
-    .caption {
-      font-style: italic;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
+    .period-number {
+      font-size: 2rem;
+      font-weight: bold;
+      opacity: 0.3;
     }
     details {
-      margin: 1rem 0;
-      background: #fff;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 0.5rem 0;
+      transition: all 0.3s ease;
     }
     summary {
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
     }
-    .hidden { display: none; }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    img:hover {
+      transform: scale(1.03);
+    }
+    .caption {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: gray;
+    }
+    .dark-mode {
+      --bg: #1e1e1e;
+      --text: #f4f4f4;
+      --bg-header: #2a2a2a;
+    }
+    :not(.dark-mode) {
+      --bg: #fff;
+      --text: #000;
+      --bg-header: #f0f0f0;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .controls {
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+    }
   </style>
-  <script>
-    function toggleLanguage() {
-      const elements = document.querySelectorAll('[data-en], [data-fa]');
-      const toPersian = document.body.getAttribute('lang') === 'en';
-      document.body.setAttribute('lang', toPersian ? 'fa' : 'en');
-      elements.forEach(el => {
-        el.innerText = toPersian ? el.getAttribute('data-fa') : el.getAttribute('data-en');
-      });
-    }function filterPeriods() {
-  const input = document.getElementById('searchInput').value.toLowerCase();
-  document.querySelectorAll('.period').forEach(period => {
-    period.style.display = period.innerText.toLowerCase().includes(input) ? '' : 'none';
-  });
-}
-
-  </script>
 </head>
-<body lang="en">
+<body>
   <header>
-    <h1 data-en="Interactive Art History" data-fa="تاریخ هنر تعاملی">Interactive Art History</h1>
-  </header>
-  <nav>
-    <div class="links">
-      <a href="#prehistoric">Prehistoric</a>
-      <a href="#egyptian">Egyptian</a>
-      <a href="#greek">Greek & Roman</a>
-      <a href="#byzantine">Byzantine</a>
-      <a href="#medieval">Medieval</a>
-      <a href="#renaissance">Renaissance</a>
-      <a href="#mannerism">Mannerism</a>
-      <a href="#baroque">Baroque</a>
-      <a href="#rococo">Rococo</a>
-      <a href="#neoclassicism">Neoclassicism</a>
-    </div>
+    <h1>Art History Timeline</h1>
     <div class="controls">
-      <input id="searchInput" type="text" placeholder="Search..." oninput="filterPeriods()">
-      <button class="language-toggle" onclick="toggleLanguage()">FA/EN</button>
+      <input type="text" id="search" placeholder="Search periods...">
+      <button id="languageToggle">FA</button>
+      <button id="themeToggle">🌙</button>
     </div>
-  </nav>
-  <main>
-    <section id="prehistoric" class="period">
-      <h2>Prehistoric (Before 3000 BCE)</h2>
-      <p>Characterized by cave paintings, petroglyphs, and megalithic structures. Art was used for ritualistic or communicative purposes.</p><details>
-    <summary>Unknown Artists</summary>
-    <p>Anonymous individuals who created early artworks such as the Lascaux cave paintings in France.</p>
-    <details>
-      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Lascaux_Caves_%28cropped%29.jpg" alt="Lascaux Cave Painting" class="artwork"></summary>
-      <p class="caption">The Lascaux cave paintings are over 17,000 years old and depict animals like bulls and deer.</p>
-    </details>
-  </details>
-</section>
-
-<section id="egyptian" class="period">
-  <h2>Egyptian (3000–332 BCE)</h2>
-  <p>Focused on afterlife, symbolism, and order. Often stylized and flat, using hierarchical scale.</p>
+  </header>  <main id="content">
+    <!-- Example period -->
+    <section id="renaissance" class="period">
+      <div class="period-number">5</div>
+      <h2><span class="en">Renaissance (1300 AC – 1600 AC)</span><span class="fa">رنسانس (۱۳۰۰ بعد از میلاد – ۱۶۰۰ بعد از میلاد)</span></h2>
+      <p class="en">A cultural movement that profoundly affected European intellectual life.</p>
+      <p class="fa">جنبشی فرهنگی که به شدت بر زندگی فکری اروپا تأثیر گذاشت.</p><h3 class="en">Famous Artists</h3>
+  <h3 class="fa">هنرمندان مشهور</h3>
 
   <details>
-    <summary>Thutmose</summary>
-    <p>Thutmose was the royal sculptor of Akhenaten and is known for the famous bust of Queen Nefertiti.</p>
+    <summary><span class="en">Leonardo da Vinci</span><span class="fa">لئوناردو داوینچی</span></summary>
+    <p class="en">Leonardo was an Italian polymath of the High Renaissance.</p>
+    <p class="fa">لئوناردو نابغه‌ای ایتالیایی در دوره رنسانس بود.</p>
+
     <details>
-      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Nefertiti_berlin.jpg" alt="Nefertiti Bust" class="artwork"></summary>
-      <p class="caption">This bust of Queen Nefertiti is renowned for its elegance and was discovered in Amarna.</p>
+      <summary>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Mona_Lisa%2C_by_Leonardo_da_Vinci.jpg" alt="Mona Lisa">
+      </summary>
+      <p class="caption en">The Mona Lisa (1503–1506), a portrait known for its enigmatic expression.</p>
+      <p class="caption fa">مونالیزا (۱۵۰۳–۱۵۰۶)، پرتره‌ای مشهور با لبخندی مرموز.</p>
     </details>
   </details>
 </section>
+<!-- More periods go here -->
 
-<section id="greek" class="period">
-  <h2>Greek & Roman (850 BCE – 476 CE)</h2>
-  <p>Focused on idealized human forms, architecture, and mythology. Romans expanded on Greek techniques.</p>
-
-  <details>
-    <summary>Phidias</summary>
-    <p>Famous Greek sculptor known for his colossal statue of Zeus at Olympia and his work on the Parthenon.</p>
-    <details>
-      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Parthenon_statues.jpg" alt="Parthenon sculpture" class="artwork"></summary>
-      <p class="caption">Parthenon sculptures reflect the Greek ideals of balance, proportion, and beauty.</p>
-    </details>
-  </details>
-</section>
-
-<section id="byzantine" class="period">
-  <h2>Byzantine (330–1453)</h2>
-  <p>Spiritual, symbolic, and flat in style. Mosaics and icons dominated religious art.</p>
-
-  <details>
-    <summary>Unknown Artists</summary>
-    <p>Created religious icons and mosaics, such as those found in the Hagia Sophia in Constantinople.</p>
-    <details>
-      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Deesis_mosaic%2C_Hagia_Sophia.jpg" alt="Byzantine Mosaic" class="artwork"></summary>
-      <p class="caption">The Deësis mosaic in Hagia Sophia shows Christ flanked by the Virgin Mary and John the Baptist.</p>
-    </details>
-  </details>
-</section>
-
-<section id="medieval" class="period">
-  <h2>Medieval (500–1400)</h2>
-  <p>Art focused on Christian themes and was often symbolic rather than realistic.</p>
-
-  <details>
-    <summary>Giotto</summary>
-    <p>Early Italian painter known for bringing more naturalism into religious art; considered a forerunner to the Renaissance.</p>
-    <details>
-      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Giotto_-_The_Lamentation_%28detail%29.jpg" alt="Giotto Lamentation" class="artwork"></summary>
-      <p class="caption">Giotto's "Lamentation" shows emotional depth and foreshortening—hallmarks of proto-Renaissance style.</p>
-    </details>
-  </details>
-</section>
-
-  </main>
-</body>
+  </main>  <script src="script.js"></script></body>
 </html>
