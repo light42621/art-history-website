@@ -1,158 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Art History</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Art History</title>
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      display: flex;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 240px;
+      background: #222;
+      color: white;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    nav h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    nav a {
+      display: block;
+      color: #aaa;
+      text-decoration: none;
+      padding: 0.5rem 0;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    main {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+    .period {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 2rem;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .artwork {
+      max-width: 100%;
+      margin: 1rem 0;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .artwork:hover {
+      transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      nav {
+        height: auto;
+        width: 100%;
+        position: relative;
+      }
+    }
   </style>
 </head>
-<body class="bg-white text-gray-800">
-  <!-- Header -->
-  <header class="bg-gray-900 text-white py-6 px-4">
-    <div class="max-w-6xl mx-auto">
-      <h1 class="text-3xl font-bold">The Evolution of Art</h1>
-      <p class="text-gray-300 mt-2">An interactive journey through 24+ art periods</p>
-    </div>
-  </header>
-
-  <!-- Timeline Navigation -->
-  <nav class="bg-gray-100 py-4 px-4 shadow-sm sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 text-sm text-center">
-      <a href="#prehistoric" class="text-blue-600 hover:underline">Prehistoric</a>
-      <a href="#egyptian" class="text-blue-600 hover:underline">Egyptian</a>
-      <a href="#greek" class="text-blue-600 hover:underline">Greek & Roman</a>
-      <a href="#byzantine" class="text-blue-600 hover:underline">Byzantine</a>
-      <a href="#medieval" class="text-blue-600 hover:underline">Medieval</a>
-    </div>
+<body>
+  <nav>
+    <h2>Art Periods</h2>
+    <a href="#prehistoric">1. Prehistoric</a>
+    <a href="#egyptian">2. Egyptian</a>
+    <a href="#greek">3. Greek & Roman</a>
+    <a href="#byzantine">4. Byzantine</a>
+    <a href="#medieval">5. Medieval</a>
+    <a href="#renaissance">6. Renaissance</a>
+    <a href="#mannerism">7. Mannerism</a>
+    <a href="#baroque">8. Baroque</a>
+    <a href="#rococo">9. Rococo</a>
+    <a href="#neoclassicism">10. Neoclassicism</a>
   </nav>
+  <main>
+    <section id="prehistoric" class="period">
+      <h2>1. Prehistoric (Before 3000 BCE)</h2>
+      <p>Characterized by cave paintings, petroglyphs, and megalithic structures. Art was used for ritualistic or communicative purposes.</p>
+      <ul>
+        <li><strong>Unknown Artists</strong> – The creators of the Lascaux cave paintings in France.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Lascaux_painting.jpg/800px-Lascaux_painting.jpg" alt="Lascaux Cave Painting" class="artwork">
+      </ul>
+    </section>
 
-  <!-- Prehistoric Art -->
-  <section id="prehistoric" class="py-12 px-4 border-b border-gray-200">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-900">Prehistoric Art (c. 40,000–2,000 BCE)</h2>
-      <p class="mt-2 text-gray-700">Prehistoric art marks humanity’s earliest visual expression, focused on survival, fertility, and spirituality through carvings, cave paintings, and figurines.</p>
+    <section id="egyptian" class="period">
+      <h2>2. Egyptian (3000–332 BCE)</h2>
+      <p>Focused on afterlife, symbolism, and order. Often stylized and flat, using hierarchical scale.</p>
+      <ul>
+        <li><strong>Thutmose</strong> – Credited with the famous bust of Nefertiti.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Nofretete_Neues_Museum.jpg/800px-Nofretete_Neues_Museum.jpg" alt="Nefertiti Bust" class="artwork">
+      </ul>
+    </section>
 
-      <div class="mt-6">
-        <h3 class="text-xl font-semibold text-gray-800">Anonymous Lascaux Artists</h3>
-        <p class="text-gray-600 mt-1">These unknown creators decorated caves with depictions of animals and human symbols, expressing early storytelling and ritual practices.</p>
-      </div>
+    <section id="greek" class="period">
+      <h2>3. Greek & Roman (850 BCE – 476 CE)</h2>
+      <p>Focused on idealized human forms, architecture, and mythology. Romans expanded on Greek techniques.</p>
+      <ul>
+        <li><strong>Phidias</strong> – Designed the statue of Zeus at Olympia.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Parthenon_frieze%2C_Louvre.jpg/800px-Parthenon_frieze%2C_Louvre.jpg" alt="Parthenon Frieze" class="artwork">
+      </ul>
+    </section>
 
-      <div class="mt-4 grid sm:grid-cols-2 gap-4">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Lascaux_painting.jpg" alt="Lascaux Cave" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Lascaux Cave Painting (c. 17,000 BCE) – Bison and horses depicted using mineral pigments.</p>
-        </div>
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Venus_von_Willendorf_01.jpg" alt="Venus of Willendorf" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Venus of Willendorf (c. 28,000 BCE) – Fertility figure symbolizing abundance and survival.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="byzantine" class="period">
+      <h2>4. Byzantine (330–1453)</h2>
+      <p>Spiritual, symbolic, and flat in style. Mosaics and icons dominated religious art.</p>
+      <ul>
+        <li><strong>Unknown Artists</strong> – Hagia Sophia mosaics in Constantinople.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Hagia_Sophia_Deesis_mosaic.jpg/800px-Hagia_Sophia_Deesis_mosaic.jpg" alt="Byzantine Mosaic" class="artwork">
+      </ul>
+    </section>
 
-  <!-- Egyptian Art -->
-  <section id="egyptian" class="py-12 px-4 border-b border-gray-200">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-900">Ancient Egyptian Art (c. 3,000–300 BCE)</h2>
-      <p class="mt-2 text-gray-700">Egyptian art focused on the afterlife, gods, and divine rule, characterized by rigid forms, hieroglyphics, and symbolic proportions.</p>
+    <section id="medieval" class="period">
+      <h2>5. Medieval (500–1400)</h2>
+      <p>Art focused on Christian themes and was often symbolic rather than realistic.</p>
+      <ul>
+        <li><strong>Giotto</strong> – Considered the precursor to the Renaissance with his more natural figures.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Giotto_-_Scrovegni_-_-22-_-_Lamentation_%28The_Mourning_of_Christ%29_adj.jpg/800px-Giotto_-_Scrovegni_-_-22-_-_Lamentation_%28The_Mourning_of_Christ%29_adj.jpg" alt="Giotto - Lamentation" class="artwork">
+      </ul>
+    </section>
 
-      <div class="mt-6">
-        <h3 class="text-xl font-semibold text-gray-800">Thutmose</h3>
-        <p class="text-gray-600 mt-1">Thutmose was the royal sculptor credited with the iconic bust of Nefertiti, embodying Egyptian ideals of beauty and symmetry.</p>
-      </div>
+    <section id="renaissance" class="period">
+      <h2>6. Renaissance (1300–1600)</h2>
+      <p>The Renaissance marked the rebirth of classical art, literature, and humanism. Artists focused on realism, perspective, and human anatomy.</p>
+      <ul>
+        <li><strong>Leonardo da Vinci</strong> – Known for "Mona Lisa" and "The Last Supper".</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mona_Lisa.jpg/800px-Mona_Lisa.jpg" alt="Mona Lisa" class="artwork">
+        <li><strong>Michelangelo</strong> – Master sculptor and painter of the Sistine Chapel ceiling.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg/800px-Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg" alt="Creation of Adam" class="artwork">
+      </ul>
+    </section>
 
-      <div class="mt-4 grid sm:grid-cols-2 gap-4">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Nofretete_Neues_Museum.jpg" alt="Bust of Nefertiti" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Bust of Nefertiti (c. 1345 BCE) – Elegance, grace, and idealized female beauty.</p>
-        </div>
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Tutmask.jpg" alt="Mask of Tutankhamun" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Mask of Tutankhamun (c. 1323 BCE) – Gold funerary mask with inlaid gemstones.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="mannerism" class="period">
+      <h2>7. Mannerism (1520–1600)</h2>
+      <p>Mannerism reacted to the balance of Renaissance art by introducing elongated forms, exaggerated poses, and tension.</p>
+      <ul>
+        <li><strong>El Greco</strong> – Known for spiritual intensity and dramatic lighting.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/El_Greco_-_The_Disrobing_of_Christ_-_WGA10502.jpg/800px-El_Greco_-_The_Disrobing_of_Christ_-_WGA10502.jpg" alt="The Disrobing of Christ" class="artwork">
+      </ul>
+    </section>
 
-  <!-- Greek & Roman Art -->
-  <section id="greek" class="py-12 px-4 border-b border-gray-200">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-900">Greek and Roman Art (c. 900 BCE – 476 CE)</h2>
-      <p class="mt-2 text-gray-700">Classical art emphasized ideal human forms, balance, and proportion, evolving from Greek naturalism to Roman realism.</p>
+    <section id="baroque" class="period">
+      <h2>8. Baroque (1600–1750)</h2>
+      <p>Baroque art used motion, drama, and emotional intensity to convey power and religious fervor.</p>
+      <ul>
+        <li><strong>Caravaggio</strong> – Master of chiaroscuro; known for "The Calling of Saint Matthew".</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Caravaggio_%28Michelangelo_Merisi%29_-_The_Calling_of_Saint_Matthew.jpg/800px-Caravaggio_%28Michelangelo_Merisi%29_-_The_Calling_of_Saint_Matthew.jpg" alt="The Calling of Saint Matthew" class="artwork">
+        <li><strong>Peter Paul Rubens</strong> – Famous for dynamic compositions and sensual figures.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Peter_Paul_Rubens_117.jpg/800px-Peter_Paul_Rubens_117.jpg" alt="Rubens painting" class="artwork">
+      </ul>
+    </section>
 
-      <div class="mt-6">
-        <h3 class="text-xl font-semibold text-gray-800">Phidias</h3>
-        <p class="text-gray-600 mt-1">Greek sculptor of the Parthenon's Athena and Zeus of Olympia. Master of classical harmony.</p>
-      </div>
+    <section id="rococo" class="period">
+      <h2>9. Rococo (1720–1780)</h2>
+      <p>Rococo embraced lightness, elegance, and playful themes, often depicting aristocratic leisure in pastel palettes.</p>
+      <ul>
+        <li><strong>Jean-Honoré Fragonard</strong> – Known for "The Swing", a symbol of Rococo playfulness.</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Jean-Honor%C3%A9_Fragonard_-_The_Swing_%28c.1767%29.jpg/800px-Jean-Honor%C3%A9_Fragonard_-_The_Swing_%28c.1767%29.jpg" alt="The Swing" class="artwork">
+      </ul>
+    </section>
 
-      <div class="mt-4 grid sm:grid-cols-2 gap-4">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Parthenon-2008.JPG" alt="Parthenon" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Parthenon (447–432 BCE) – Temple to Athena showcasing Doric architecture and sculpture.</p>
-        </div>
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Capitoline_Brutus_Musei_Capitolini_MC1183.jpg" alt="Roman Bust" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Roman Portrait Bust (1st c. BCE) – Realistic depiction of leaders, showing wisdom and age.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Byzantine Art -->
-  <section id="byzantine" class="py-12 px-4 border-b border-gray-200">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-900">Byzantine Art (c. 330–1453 CE)</h2>
-      <p class="mt-2 text-gray-700">Centered in Constantinople, Byzantine art focused on spiritual symbolism, flat gold backgrounds, and religious icons.</p>
-
-      <div class="mt-6">
-        <h3 class="text-xl font-semibold text-gray-800">Anonymous Iconographers</h3>
-        <p class="text-gray-600 mt-1">Icons were made by monks and painters devoted to spiritual expression, not fame. The work was considered a form of worship.</p>
-      </div>
-
-      <div class="mt-4 grid sm:grid-cols-2 gap-4">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Christ_Pantocrator_icon.jpg" alt="Christ Pantocrator" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Christ Pantocrator (6th c.) – Icon from Sinai showing divine authority and serenity.</p>
-        </div>
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Hagia_Sophia_Mosaic_of_Christ_Pantocrator.jpg" alt="Hagia Sophia Mosaic" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Hagia Sophia Mosaics – Gold-backed religious scenes in a vast Christian basilica.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Medieval Art -->
-  <section id="medieval" class="py-12 px-4 border-b border-gray-200">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-900">Medieval Art (c. 500–1400 CE)</h2>
-      <p class="mt-2 text-gray-700">Medieval art reflects religious devotion, manuscript illumination, and Gothic cathedrals, often stylized and symbolic.</p>
-
-      <div class="mt-6">
-        <h3 class="text-xl font-semibold text-gray-800">The Limbourg Brothers</h3>
-        <p class="text-gray-600 mt-1">Flemish illuminators famous for "Les Très Riches Heures," a lavishly illustrated prayer book with detailed seasonal scenes.</p>
-      </div>
-
-      <div class="mt-4 grid sm:grid-cols-2 gap-4">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Les_Tres_Riches_Heures_du_duc_de_Berry_avril.jpg" alt="Les Très Riches Heures" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Les Très Riches Heures (c. 1412) – Calendar scenes with vibrant colors and courtly life.</p>
-        </div>
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Chartres_Cathedral_north_facade_1.jpg" alt="Chartres Cathedral" class="rounded shadow" />
-          <p class="text-sm mt-1 text-gray-500">Chartres Cathedral (c. 1194) – Gothic architecture with stained glass masterpieces.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 text-center py-6">
-    <p>&copy; 2025 Amirmohammad's Art History Project</p>
-  </footer>
+    <section id="neoclassicism" class="period">
+      <h2>10. Neoclassicism (1750–1830)</h2>
+      <p>Neoclassical art returned to classical ideals of order, simplicity, and heroism, influenced by Enlightenment values.</p>
+      <ul>
+        <li><strong>Jacques-Louis David</strong> – Known for "Oath of the Horatii" and "Death of Marat".</li>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Jacques-Louis_David%2C_The_Death_of_Marat.jpg/800px-Jacques-Louis_David%2C_The_Death_of_Marat.jpg" alt="Death of Marat" class="artwork">
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
+
