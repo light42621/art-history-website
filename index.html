@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,35 +7,61 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      display: flex;
       background-color: #f7f7f7;
       color: #333;
     }
-    nav {
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
       position: sticky;
       top: 0;
-      height: 100vh;
-      width: 240px;
+      z-index: 1000;
+    }
+    nav {
       background: #222;
       color: white;
-      overflow-y: auto;
-      padding: 1rem;
+      padding: 0.5rem 1rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
-    nav h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+    nav .links {
+      display: flex;
+      flex-wrap: wrap;
     }
     nav a {
-      display: block;
       color: #aaa;
       text-decoration: none;
-      padding: 0.5rem 0;
+      margin-right: 1rem;
+      display: inline-block;
     }
     nav a:hover {
-      color: #fff;
+      color: white;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .language-toggle {
+      cursor: pointer;
+      background: #444;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 5px;
+    }
+    #searchInput {
+      padding: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
     main {
-      flex-grow: 1;
       padding: 2rem;
     }
     .period {
@@ -44,140 +69,138 @@
       border-bottom: 1px solid #ddd;
       padding-bottom: 2rem;
     }
-    h2 {
-      color: #2c3e50;
-    }
     .artwork {
       max-width: 100%;
-      margin: 1rem 0;
       border-radius: 12px;
-      transition: transform 0.3s ease;
+      margin: 1rem 0;
       cursor: pointer;
     }
-    .artwork:hover {
-      transform: scale(1.05);
+    .caption {
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
     }
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      nav {
-        height: auto;
-        width: 100%;
-        position: relative;
-      }
+    details {
+      margin: 1rem 0;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .hidden { display: none; }
   </style>
+  <script>
+    function toggleLanguage() {
+      const elements = document.querySelectorAll('[data-en], [data-fa]');
+      const toPersian = document.body.getAttribute('lang') === 'en';
+      document.body.setAttribute('lang', toPersian ? 'fa' : 'en');
+      elements.forEach(el => {
+        el.innerText = toPersian ? el.getAttribute('data-fa') : el.getAttribute('data-en');
+      });
+    }function filterPeriods() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.period').forEach(period => {
+    period.style.display = period.innerText.toLowerCase().includes(input) ? '' : 'none';
+  });
+}
+
+  </script>
 </head>
-<body>
+<body lang="en">
+  <header>
+    <h1 data-en="Interactive Art History" data-fa="تاریخ هنر تعاملی">Interactive Art History</h1>
+  </header>
   <nav>
-    <h2>Art Periods</h2>
-    <a href="#prehistoric">1. Prehistoric</a>
-    <a href="#egyptian">2. Egyptian</a>
-    <a href="#greek">3. Greek & Roman</a>
-    <a href="#byzantine">4. Byzantine</a>
-    <a href="#medieval">5. Medieval</a>
-    <a href="#renaissance">6. Renaissance</a>
-    <a href="#mannerism">7. Mannerism</a>
-    <a href="#baroque">8. Baroque</a>
-    <a href="#rococo">9. Rococo</a>
-    <a href="#neoclassicism">10. Neoclassicism</a>
+    <div class="links">
+      <a href="#prehistoric">Prehistoric</a>
+      <a href="#egyptian">Egyptian</a>
+      <a href="#greek">Greek & Roman</a>
+      <a href="#byzantine">Byzantine</a>
+      <a href="#medieval">Medieval</a>
+      <a href="#renaissance">Renaissance</a>
+      <a href="#mannerism">Mannerism</a>
+      <a href="#baroque">Baroque</a>
+      <a href="#rococo">Rococo</a>
+      <a href="#neoclassicism">Neoclassicism</a>
+    </div>
+    <div class="controls">
+      <input id="searchInput" type="text" placeholder="Search..." oninput="filterPeriods()">
+      <button class="language-toggle" onclick="toggleLanguage()">FA/EN</button>
+    </div>
   </nav>
   <main>
     <section id="prehistoric" class="period">
-      <h2>1. Prehistoric (Before 3000 BCE)</h2>
-      <p>Characterized by cave paintings, petroglyphs, and megalithic structures. Art was used for ritualistic or communicative purposes.</p>
-      <ul>
-        <li><strong>Unknown Artists</strong> – The creators of the Lascaux cave paintings in France.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Lascaux_painting.jpg/800px-Lascaux_painting.jpg" alt="Lascaux Cave Painting" class="artwork">
-      </ul>
-    </section>
+      <h2>Prehistoric (Before 3000 BCE)</h2>
+      <p>Characterized by cave paintings, petroglyphs, and megalithic structures. Art was used for ritualistic or communicative purposes.</p><details>
+    <summary>Unknown Artists</summary>
+    <p>Anonymous individuals who created early artworks such as the Lascaux cave paintings in France.</p>
+    <details>
+      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Lascaux_Caves_%28cropped%29.jpg" alt="Lascaux Cave Painting" class="artwork"></summary>
+      <p class="caption">The Lascaux cave paintings are over 17,000 years old and depict animals like bulls and deer.</p>
+    </details>
+  </details>
+</section>
 
-    <section id="egyptian" class="period">
-      <h2>2. Egyptian (3000–332 BCE)</h2>
-      <p>Focused on afterlife, symbolism, and order. Often stylized and flat, using hierarchical scale.</p>
-      <ul>
-        <li><strong>Thutmose</strong> – Credited with the famous bust of Nefertiti.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Nofretete_Neues_Museum.jpg/800px-Nofretete_Neues_Museum.jpg" alt="Nefertiti Bust" class="artwork">
-      </ul>
-    </section>
+<section id="egyptian" class="period">
+  <h2>Egyptian (3000–332 BCE)</h2>
+  <p>Focused on afterlife, symbolism, and order. Often stylized and flat, using hierarchical scale.</p>
 
-    <section id="greek" class="period">
-      <h2>3. Greek & Roman (850 BCE – 476 CE)</h2>
-      <p>Focused on idealized human forms, architecture, and mythology. Romans expanded on Greek techniques.</p>
-      <ul>
-        <li><strong>Phidias</strong> – Designed the statue of Zeus at Olympia.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Parthenon_frieze%2C_Louvre.jpg/800px-Parthenon_frieze%2C_Louvre.jpg" alt="Parthenon Frieze" class="artwork">
-      </ul>
-    </section>
+  <details>
+    <summary>Thutmose</summary>
+    <p>Thutmose was the royal sculptor of Akhenaten and is known for the famous bust of Queen Nefertiti.</p>
+    <details>
+      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Nefertiti_berlin.jpg" alt="Nefertiti Bust" class="artwork"></summary>
+      <p class="caption">This bust of Queen Nefertiti is renowned for its elegance and was discovered in Amarna.</p>
+    </details>
+  </details>
+</section>
 
-    <section id="byzantine" class="period">
-      <h2>4. Byzantine (330–1453)</h2>
-      <p>Spiritual, symbolic, and flat in style. Mosaics and icons dominated religious art.</p>
-      <ul>
-        <li><strong>Unknown Artists</strong> – Hagia Sophia mosaics in Constantinople.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Hagia_Sophia_Deesis_mosaic.jpg/800px-Hagia_Sophia_Deesis_mosaic.jpg" alt="Byzantine Mosaic" class="artwork">
-      </ul>
-    </section>
+<section id="greek" class="period">
+  <h2>Greek & Roman (850 BCE – 476 CE)</h2>
+  <p>Focused on idealized human forms, architecture, and mythology. Romans expanded on Greek techniques.</p>
 
-    <section id="medieval" class="period">
-      <h2>5. Medieval (500–1400)</h2>
-      <p>Art focused on Christian themes and was often symbolic rather than realistic.</p>
-      <ul>
-        <li><strong>Giotto</strong> – Considered the precursor to the Renaissance with his more natural figures.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Giotto_-_Scrovegni_-_-22-_-_Lamentation_%28The_Mourning_of_Christ%29_adj.jpg/800px-Giotto_-_Scrovegni_-_-22-_-_Lamentation_%28The_Mourning_of_Christ%29_adj.jpg" alt="Giotto - Lamentation" class="artwork">
-      </ul>
-    </section>
+  <details>
+    <summary>Phidias</summary>
+    <p>Famous Greek sculptor known for his colossal statue of Zeus at Olympia and his work on the Parthenon.</p>
+    <details>
+      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Parthenon_statues.jpg" alt="Parthenon sculpture" class="artwork"></summary>
+      <p class="caption">Parthenon sculptures reflect the Greek ideals of balance, proportion, and beauty.</p>
+    </details>
+  </details>
+</section>
 
-    <section id="renaissance" class="period">
-      <h2>6. Renaissance (1300–1600)</h2>
-      <p>The Renaissance marked the rebirth of classical art, literature, and humanism. Artists focused on realism, perspective, and human anatomy.</p>
-      <ul>
-        <li><strong>Leonardo da Vinci</strong> – Known for "Mona Lisa" and "The Last Supper".</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mona_Lisa.jpg/800px-Mona_Lisa.jpg" alt="Mona Lisa" class="artwork">
-        <li><strong>Michelangelo</strong> – Master sculptor and painter of the Sistine Chapel ceiling.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg/800px-Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg" alt="Creation of Adam" class="artwork">
-      </ul>
-    </section>
+<section id="byzantine" class="period">
+  <h2>Byzantine (330–1453)</h2>
+  <p>Spiritual, symbolic, and flat in style. Mosaics and icons dominated religious art.</p>
 
-    <section id="mannerism" class="period">
-      <h2>7. Mannerism (1520–1600)</h2>
-      <p>Mannerism reacted to the balance of Renaissance art by introducing elongated forms, exaggerated poses, and tension.</p>
-      <ul>
-        <li><strong>El Greco</strong> – Known for spiritual intensity and dramatic lighting.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/El_Greco_-_The_Disrobing_of_Christ_-_WGA10502.jpg/800px-El_Greco_-_The_Disrobing_of_Christ_-_WGA10502.jpg" alt="The Disrobing of Christ" class="artwork">
-      </ul>
-    </section>
+  <details>
+    <summary>Unknown Artists</summary>
+    <p>Created religious icons and mosaics, such as those found in the Hagia Sophia in Constantinople.</p>
+    <details>
+      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Deesis_mosaic%2C_Hagia_Sophia.jpg" alt="Byzantine Mosaic" class="artwork"></summary>
+      <p class="caption">The Deësis mosaic in Hagia Sophia shows Christ flanked by the Virgin Mary and John the Baptist.</p>
+    </details>
+  </details>
+</section>
 
-    <section id="baroque" class="period">
-      <h2>8. Baroque (1600–1750)</h2>
-      <p>Baroque art used motion, drama, and emotional intensity to convey power and religious fervor.</p>
-      <ul>
-        <li><strong>Caravaggio</strong> – Master of chiaroscuro; known for "The Calling of Saint Matthew".</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Caravaggio_%28Michelangelo_Merisi%29_-_The_Calling_of_Saint_Matthew.jpg/800px-Caravaggio_%28Michelangelo_Merisi%29_-_The_Calling_of_Saint_Matthew.jpg" alt="The Calling of Saint Matthew" class="artwork">
-        <li><strong>Peter Paul Rubens</strong> – Famous for dynamic compositions and sensual figures.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Peter_Paul_Rubens_117.jpg/800px-Peter_Paul_Rubens_117.jpg" alt="Rubens painting" class="artwork">
-      </ul>
-    </section>
+<section id="medieval" class="period">
+  <h2>Medieval (500–1400)</h2>
+  <p>Art focused on Christian themes and was often symbolic rather than realistic.</p>
 
-    <section id="rococo" class="period">
-      <h2>9. Rococo (1720–1780)</h2>
-      <p>Rococo embraced lightness, elegance, and playful themes, often depicting aristocratic leisure in pastel palettes.</p>
-      <ul>
-        <li><strong>Jean-Honoré Fragonard</strong> – Known for "The Swing", a symbol of Rococo playfulness.</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Jean-Honor%C3%A9_Fragonard_-_The_Swing_%28c.1767%29.jpg/800px-Jean-Honor%C3%A9_Fragonard_-_The_Swing_%28c.1767%29.jpg" alt="The Swing" class="artwork">
-      </ul>
-    </section>
+  <details>
+    <summary>Giotto</summary>
+    <p>Early Italian painter known for bringing more naturalism into religious art; considered a forerunner to the Renaissance.</p>
+    <details>
+      <summary><img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Giotto_-_The_Lamentation_%28detail%29.jpg" alt="Giotto Lamentation" class="artwork"></summary>
+      <p class="caption">Giotto's "Lamentation" shows emotional depth and foreshortening—hallmarks of proto-Renaissance style.</p>
+    </details>
+  </details>
+</section>
 
-    <section id="neoclassicism" class="period">
-      <h2>10. Neoclassicism (1750–1830)</h2>
-      <p>Neoclassical art returned to classical ideals of order, simplicity, and heroism, influenced by Enlightenment values.</p>
-      <ul>
-        <li><strong>Jacques-Louis David</strong> – Known for "Oath of the Horatii" and "Death of Marat".</li>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Jacques-Louis_David%2C_The_Death_of_Marat.jpg/800px-Jacques-Louis_David%2C_The_Death_of_Marat.jpg" alt="Death of Marat" class="artwork">
-      </ul>
-    </section>
   </main>
 </body>
 </html>
-
